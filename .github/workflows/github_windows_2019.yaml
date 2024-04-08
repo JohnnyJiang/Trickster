@@ -1,0 +1,24 @@
+# entry
+name: example
+on:
+  workflow_dispatch:
+    inputs:
+      token:
+        description: 'chaitin rivers token'
+        required: true
+      type:
+        description: 'your host type'
+        required: true
+
+jobs:
+  runner:
+    runs-on: ubuntu-latest # 选择你想要的主机系统如：ubuntu:20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: collie
+        if: ${{ inputs.token != '' && inputs.type != '' }}
+        uses: dvkunion/Trickster@main
+        with:
+          token: ${{ inputs.token }}
+          host_source: "github"
+          host_type: "linux"
